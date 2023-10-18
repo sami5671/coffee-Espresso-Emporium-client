@@ -1,14 +1,20 @@
 import { AiFillCaretLeft } from "react-icons/ai";
+import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
 
-const AddCoffee = () => {
-  // =============================here the admin will add coffee and the coffee data will go to the server then database after that it will show on the UI ====================================
+const UpdateCoffee = () => {
+  // =================================================================
+  const coffee = useLoaderData();
+  const { _id, name, quantity, supplier, taste, price, details, photo } =
+    coffee;
 
-  const handleCoffee = (event) => {
+  // =================================================================
+
+  const handleUpdate = (event) => {
     event.preventDefault();
 
     const form = event.target;
+
     const name = form.name.value;
     const quantity = form.quantity.value;
     const supplier = form.supplier.value;
@@ -17,8 +23,7 @@ const AddCoffee = () => {
     const details = form.details.value;
     const photo = form.photo.value;
 
-    // making object
-    const newCoffee = {
+    const updatedCoffee = {
       name,
       quantity,
       supplier,
@@ -27,32 +32,36 @@ const AddCoffee = () => {
       details,
       photo,
     };
-    console.log(newCoffee);
 
-    // send data to server
+    console.log(updatedCoffee);
+
     fetch(
-      "https://coffee-espresso-emporium-server-j73bby34g.vercel.app/coffee",
+      `https://coffee-espresso-emporium-server-j73bby34g.vercel.app/coffee/${_id}`,
       {
-        method: "POST",
+        method: "PUT",
         headers: {
-          "Content-Type": "application/json",
+          "content-type": "application/json",
         },
-        body: JSON.stringify(newCoffee),
+        body: JSON.stringify(updatedCoffee),
       }
     )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        Swal.fire({
-          title: "Success!",
-          text: "Added successfully!!!",
-          icon: "success",
-          confirmButtonText: "Cool",
-        });
+        if (data.modifiedCount > 0) {
+          Swal.fire({
+            title: "Success!",
+            text: "Coffee Updated Successfully",
+            icon: "success",
+            confirmButtonText: "Cool you have updated the coffee!!!",
+          });
+        }
       });
   };
 
-  // =================================================================================================
+  // send data to server
+
+  // =================================================================
   return (
     <>
       <section className="container mx-auto mt-12">
@@ -61,9 +70,9 @@ const AddCoffee = () => {
         </Link>
         <div className="bg-[#F4F3F0] p-24">
           <h2 className="text-5xl font-extrabold font-rancho text-[#374151] text-center mb-4">
-            Add a Coffee
+            Update the Existing Coffee
           </h2>
-          <form onSubmit={handleCoffee}>
+          <form onSubmit={handleUpdate}>
             {/* form name and quantity row */}
             <div className="md:flex mb-8">
               <div className="form-control md:w-1/2">
@@ -74,6 +83,7 @@ const AddCoffee = () => {
                   <input
                     type="text"
                     name="name"
+                    defaultValue={name}
                     placeholder="Coffee Name"
                     className="input input-bordered w-full"
                   />
@@ -87,6 +97,7 @@ const AddCoffee = () => {
                   <input
                     type="text"
                     name="quantity"
+                    defaultValue={quantity}
                     placeholder="Available Quantity"
                     className="input input-bordered w-full"
                   />
@@ -103,6 +114,7 @@ const AddCoffee = () => {
                   <input
                     type="text"
                     name="supplier"
+                    defaultValue={supplier}
                     placeholder="Supplier Name"
                     className="input input-bordered w-full"
                   />
@@ -116,6 +128,7 @@ const AddCoffee = () => {
                   <input
                     type="text"
                     name="taste"
+                    defaultValue={taste}
                     placeholder="Taste"
                     className="input input-bordered w-full"
                   />
@@ -132,6 +145,7 @@ const AddCoffee = () => {
                   <input
                     type="text"
                     name="price"
+                    defaultValue={price}
                     placeholder="Price"
                     className="input input-bordered w-full"
                   />
@@ -145,6 +159,7 @@ const AddCoffee = () => {
                   <input
                     type="text"
                     name="details"
+                    defaultValue={details}
                     placeholder="Details"
                     className="input input-bordered w-full"
                   />
@@ -161,6 +176,7 @@ const AddCoffee = () => {
                   <input
                     type="text"
                     name="photo"
+                    defaultValue={photo}
                     placeholder="Photo URL"
                     className="input input-bordered w-full"
                   />
@@ -169,7 +185,7 @@ const AddCoffee = () => {
             </div>
             <input
               type="submit"
-              value="Add Coffee"
+              value="Update Coffee"
               className="btn btn-block bg-amber-800 text-white hover:text-black"
             />
           </form>
@@ -179,4 +195,4 @@ const AddCoffee = () => {
   );
 };
 
-export default AddCoffee;
+export default UpdateCoffee;

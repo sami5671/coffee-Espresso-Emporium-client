@@ -1,6 +1,5 @@
 .background-img {
-  background: url("/src/images/more/3.png");
-
+  background: url("/src/Components/images/more/3.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;

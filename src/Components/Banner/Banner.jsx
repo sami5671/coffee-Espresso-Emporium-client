@@ -26,26 +26,26 @@ const Banner = () => {
 
         <section className="grid lg:grid-cols-4 lg:px-24 py-6 gap-12 bg-[#ECEAE3] text-[#331A15]">
           <div>
-            <img src="/src/images/icons/1.png" alt="" />
+            <img src="https://imgur.com/okufz1K.png" alt="" />
             <h1>Awesome Aroma</h1>
             <p>
               You will definitely be a fan of the design & aroma of your coffee
             </p>
           </div>
           <div>
-            <img src="/src/images/icons/2.png" alt="" />
+            <img src="https://imgur.com/bplYGk1.png" alt="" />
             <h1>High Quality</h1>
             <p>We served the coffee to you maintaining the best quality</p>
           </div>
           <div>
-            <img src="/src/images/icons/3.png" alt="" />
+            <img src="https://imgur.com/m6PxEuG.png" alt="" />
             <h1>Pure Grades</h1>
             <p>
               The coffee is made of the green coffee beans which you will love
             </p>
           </div>
           <div>
-            <img src="/src/images/icons/4.png" alt="" />
+            <img src="https://imgur.com/EcoaXmq.png" alt="" />
             <h1>Proper Roasting</h1>
             <p>
               Your coffee is brewed by first roasting the green coffee beans
